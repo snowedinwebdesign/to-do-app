@@ -1,4 +1,5 @@
 function onReady(){
+  let id = 0;
   // array of to-dos
   const toDos = [];
   // access HTML form
@@ -12,13 +13,20 @@ function onReady(){
     // push new to-dos to array using object literal notation
     toDos.push({
       title: newToDoText.value, // assign value of text input to title
-      complete: false
+      complete: false,
+      id: id.value
     });
+    id++;
     //clear text input
     newToDoText.value = '';
     // call every time state changes when add new to-do
     renderTheUI();
   }
+  // where to put function 
+  function removeToDo(tot) {
+    toDos = toDos.filter((remove) => remove.id !== tot);
+    renderTheUI(toDos);
++    }
   function renderTheUI(){
     // access ul
     const toDoList = document.getElementById('toDoList');
@@ -30,11 +38,20 @@ function onReady(){
       const newLi = document.createElement('li');
       const checkbox = document.createElement('input');
       checkbox.type = "checkbox";
+      const del = document.createElement('input');
+      del.type = "button";
+      del.value = "delete";
       // add title text to newLi
       newLi.textContent = toDo.title;
       // update DOM
       toDoList.appendChild(newLi);
       newLi.appendChild(checkbox);
+      newLi.appendChild(del);
+ // assignment
+      del.addEventListener('click', event => {
+        deleteToDo(toDo.id);
+        renderTheUI();
+      });
     });
   }
   // call preventDefault to prevent page from reloading and then call createNewToDo function
