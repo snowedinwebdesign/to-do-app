@@ -14,7 +14,7 @@ function onReady(){
     toDos.push({
       title: newToDoText.value, // assign value of text input to title
       complete: false,
-      id: id.value
+      id: id
     });
     id++;
     //clear text input
@@ -22,11 +22,12 @@ function onReady(){
     // call every time state changes when add new to-do
     renderTheUI();
   }
-  // where to put function 
-  function removeToDo(tot) {
-    toDos = toDos.filter((remove) => remove.id !== tot);
+  // where to put function
+  function deleteToDo(tot) {
+    let delItem = toDos.filter((remove) => remove.id === tot);
+    toDos.splice(delItem,1);
     renderTheUI(toDos);
-+    }
+}
   function renderTheUI(){
     // access ul
     const toDoList = document.getElementById('toDoList');
