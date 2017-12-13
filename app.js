@@ -25,7 +25,7 @@ function onReady(){
   // where to put function
   function deleteToDo(tot) {
     let delItem = toDos.filter((remove) => remove.id === tot);
-    toDos.splice(delItem,1);
+    delete toDos[tot];
     renderTheUI(toDos);
 }
   function renderTheUI(){
